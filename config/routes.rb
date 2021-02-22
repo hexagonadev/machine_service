@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
- get '/users', controller: :users, action: :index
- get '/users/:id/', controller: :users, action: :show
+  get '/users', controller: :users, action: :index
+  get '/users/:id/', controller: :users, action: :show
 
- post '/users', controller: :users, action: :create
+  post '/users', controller: :users, action: :create
+
+  put '/users/:id', controller: :users, action: :update
 #  post
 #  put
 #  patch

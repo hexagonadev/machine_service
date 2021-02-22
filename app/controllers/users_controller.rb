@@ -34,4 +34,20 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def update
+    user = User.find_by(id: params[:id])
+
+    if user.update(params[:user])
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Users#Create </h1>" }
+        format.json { render json: user }
+      end
+    else
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Users#Create </h1>" }
+        format.json { render json: user.errors.full_messages }
+      end
+    end
+  end
 end
