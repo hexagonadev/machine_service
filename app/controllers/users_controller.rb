@@ -51,6 +51,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    user = User.find_by(id: params[:id])
+
+    if user.destroy
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Users#Destroy </h1>" }
+        format.json { render json: user }
+      end
+    else
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Users#Destroy </h1>" }
+        format.json { render json: user.errors.full_messages }
+      end
+    end
+  end
+
   private
 
   def user_params
