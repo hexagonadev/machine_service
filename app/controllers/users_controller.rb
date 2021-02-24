@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
+    user = User.new(name: params[:name], last_name: params[:last_name], email: params[:email])
 
     if user.save
       respond_to do |format|
@@ -54,6 +54,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :last_name, :email)
+    params.require(:users).permit(:name, :last_name, :email)
   end
 end

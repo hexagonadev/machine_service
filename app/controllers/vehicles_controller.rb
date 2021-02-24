@@ -21,7 +21,7 @@ class VehiclesController < ApplicationController
 
   def create
     user = Vehicle.find_by(id: params[:user_id])
-    vehicle = Vehicle.new(brand: params[:brand], module: params[:module], engine_size: params[:engine_size], year: params[:year], color: params[:color], vin: params[:vin], king: params[:king], user_id: params[user])
+    vehicle = Vehicle.new(vehicle_params)
 
     if vehicle.save
       respond_to do |format|
@@ -32,6 +32,7 @@ class VehiclesController < ApplicationController
       respond_to do |format|
         format.html { render inline: "<h1> Hello Vehicles#Create </h1>" }
         format.json { render json: vehicle.errors.full_messages }
+      end
     end
   end
 

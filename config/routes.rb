@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/vehicles', controller: :vehicles, action: :index
   get '/vehicles/:id', controller: :vehicles, action: :show
   post '/vehicles', controller: :vehicles, action: :create
-  put '/vehicles/:id', controller: :vehicles, action: :update
+  put '/vehicles/:user_id/:id', controller: :vehicles, action: :update
 
   get '/appointments', controller: :appointments, action: :index
   get '/appointments/:id', controller: :appointments, action: :show
