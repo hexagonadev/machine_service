@@ -4,9 +4,20 @@ Rails.application.routes.draw do
   get '/users', controller: :users, action: :index
   get '/users/:id/', controller: :users, action: :show
 
+  get '/vehicles', controller: :vehicles, action: :index
+  get '/vehicles/:id/', controller: :vehicles, action: :show
+
+  get '/appointments', controller: :appointments, action: :index
+  get '/appointments/:id/', controller: :appointments, action: :show
+
   post '/users', controller: :users, action: :create
+  post '/vehicles', controller: :vehicles, action: :create
+  post '/appointments', controller: :appointments, action: :create
 
   put '/users/:id', controller: :users, action: :update
+  put '/vehicles/:id', controller: :vehicles, action: :update
+  put '/appointments/:id', controller: :appointments, action: :update
+
 #  post
 #  put
 #  patch

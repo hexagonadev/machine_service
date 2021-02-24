@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(name: params[:name], last_name: params[:last_name], email: params[:email])
+    user = User.new(user_params)
 
     if user.save
       respond_to do |format|
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   def update
     user = User.find_by(id: params[:id])
 
-    if user.update(params[:user])
+    if user.update!(user_params)
       respond_to do |format|
         format.html { render inline: "<h1> Hello Users#Create </h1>" }
         format.json { render json: user }
@@ -49,5 +49,11 @@ class UsersController < ApplicationController
         format.json { render json: user.errors.full_messages }
       end
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :last_name, :email)
   end
 end
