@@ -20,7 +20,6 @@ class VehiclesController < ApplicationController
   end
 
   def create
-    user = Vehicle.find_by(id: params[:user_id])
     vehicle = Vehicle.new(vehicle_params)
 
     if vehicle.save
@@ -37,9 +36,9 @@ class VehiclesController < ApplicationController
   end
 
   def update
-    #vehicle = Vehicle.find_by(id: params[:id])
+    vehicle = Vehicle.find_by(id: params[:id])
 
-    if Vehicle.update(vehicle_params)
+    if vehicle.update(vehicle_params)
       respond_to do |format|
         format.html { render inline: "<h1> Hello Vehicles#Create </h1>" }
         format.json { render json: vehicle }
@@ -55,6 +54,6 @@ class VehiclesController < ApplicationController
   private
 
   def vehicle_params
-    params.require(:vehicle).permit(:brand, :module, :engine_size, :year, :color, :vin, :king)
+    params.require(:vehicle).permit(:brand, :module, :engine_size, :year, :color, :vin, :king, :user_id)
   end
 end

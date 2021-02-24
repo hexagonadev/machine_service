@@ -20,7 +20,6 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    #user = Appointments.find_by(id: params[:user_id])
     appointment = Appointment.new(appointment_params)
 
     if appointment.save
@@ -38,7 +37,7 @@ class AppointmentsController < ApplicationController
   def update
     appointment = Appointment.find_by(id: params[:id])
 
-    if Appointment.update(appointment_params)
+    if appointment.update(appointment_params)
       respond_to do |format|
         format.html { render inline: "<h1> Hello Appointments#Create </h1>" }
         format.json { render json: appointment }
@@ -54,6 +53,6 @@ class AppointmentsController < ApplicationController
   private
 
   def appointments_params
-    params.require(:appointment).permit(:description, :status)
+    params.require(:appointment).permit(:description, :appointment_date, :user_id, :vehicle_id)
   end
 end

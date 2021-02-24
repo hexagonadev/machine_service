@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find_by(id: params[:id])
+    user = User.find_by(id: params[:user_id])
 
     if user.update(user_params)
       respond_to do |format|
