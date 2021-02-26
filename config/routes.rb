@@ -1,22 +1,26 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  get '/users', controller: :users, action: :index
-  get '/users/:id/', controller: :users, action: :show
+  # get '/users', controller: :users, action: :index
+  # get '/users/:id/', controller: :users, action: :show
+  # post '/users', controller: :users, action: :create
+  # put '/users/:id', controller: :users, action: :update
+  # patch '/users/:id', controller: :users, action: :update
+  # delete 'users/:id', controller: :users, action: :destroy
 
-  get '/vehicles', controller: :vehicles, action: :index
-  get '/vehicles/:id/', controller: :vehicles, action: :show
+  resources :users, except: [:new, :edit]
+  resources :vehicles, except: [:new, :edit]
+  resources :appointments, except: [:new, :edit]
 
-  get '/appointments', controller: :appointments, action: :index
-  get '/appointments/:id/', controller: :appointments, action: :show
 
-  post '/users', controller: :users, action: :create
-  post '/vehicles', controller: :vehicles, action: :create
-  post '/appointments', controller: :appointments, action: :create
-
-  put '/users/:id', controller: :users, action: :update
-  put '/vehicles/:id', controller: :vehicles, action: :update
-  put '/appointments/:id', controller: :appointments, action: :update
+  # def resources(resource)
+  #   get "/#{resource}", controller: resource.to_sym, action: :index
+  #   get "/#{resource}/id", controller: resource.to_sym, action: :show
+  #   post "/#{resource}", controller: resource.to_sym, action: :create
+  #   put "/#{resource}/id", controller: resource.to_sym, action: :update
+  #   patch "/#{resource}/id", controller: resource.to_sym, action: :update
+  #   delete "/#{resource}/id", controller: resource.to_sym, action: :destroy
+  # end
 
 #  post
 #  put
