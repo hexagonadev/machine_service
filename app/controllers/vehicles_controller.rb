@@ -2,7 +2,7 @@ class VehiclesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    vehicles = Vehicle.all
+    vehicles = Vehicle.where(user_id: params[:user_id])
 
     respond_to do |format|
       format.html { render inline: "<h1> Hello Vehicles#Index </h1>" }
@@ -20,8 +20,18 @@ class VehiclesController < ApplicationController
   end
 
   def create
-    vehicle = Vehicle.new(vehicle_params)
+    user = User.find_by(id: params[:user_id])
+    if user.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#Create </h1>", status: :bad_request and return }
+        format.json { render json: "Error", status: 400 and return }
+      end
+    end
+    vehicle = user.vehicles.build(vehicle_params)
 
+    # vehicle = Vehicle.new(vehicle_params)
+    # vehicle.user_id = user.id
+    # vehicle.user = user
     if vehicle.save
       respond_to do |format|
         format.html { render inline: "<h1> Hello Vehicles#Create </h1>" }
@@ -54,6 +64,6 @@ class VehiclesController < ApplicationController
   private
 
   def vehicle_params
-    params.require(:vehicle).permit(:user_id, :king, :brand, :module, :engine_size, :year, :color, :vin)
+    params.require(:vehicle).permit(:king, :brand, :module, :engine_size, :year, :color, :vin)
   end
 end

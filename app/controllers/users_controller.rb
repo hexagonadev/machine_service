@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   def destroy
     user = User.find_by(id: params[:id])
 
@@ -65,6 +65,7 @@ class UsersController < ApplicationController
         format.json { render json: user.errors.full_messages }
       end
     end
+  end
   private
 
   def user_params
