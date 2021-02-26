@@ -21,8 +21,7 @@ Rails.application.routes.draw do
   #   patch "/#{resource}/id", controller: resource.to_sym, action: :update
   #   delete "/#{resource}/id", controller: resource.to_sym, action: :destroy
   # end
-
-
+  
 #  post
 #  put
 #  patch
