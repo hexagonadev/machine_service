@@ -8,9 +8,12 @@ Rails.application.routes.draw do
   # patch '/users/:id', controller: :users, action: :update
   # delete 'users/:id', controller: :users, action: :destroy
 
-  resources :users, except: [:new, :edit]
-  resources :vehicles, except: [:new, :edit]
-  resources :appointments, except: [:new, :edit]
+  resources :users, except: [:new, :edit], shallow: true do
+    resources :vehicles, except: [:new, :edit]
+    resources :appointments, except: [:new, :edit]
+  end
+
+
 
 
   # def resources(resource)

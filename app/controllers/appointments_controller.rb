@@ -20,7 +20,15 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    appointment = Appointment.new(appointment_params)
+    user = User.find_by(id: params[:user_id])
+    if user.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#Create </h1>", status: :bad_request and return }
+        format.json { render json: "Error", status: 400 and return }
+      end
+    end
+
+    appointment = user.appointment.build(appointment_params)
 
     if appointment.save
       respond_to do |format|
@@ -38,7 +46,7 @@ class AppointmentsController < ApplicationController
   def update
     appointment = Appointment.find_by(id: params[:id])
 
-    if appointment.update!(appointment_params)
+    if appointment.update(appointment_params)
       respond_to do |format|
         format.html { render inline: "<h1> Hello  appointment#update </h1>" }
         format.json { render json: appointment }
@@ -51,9 +59,25 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def destroy
+    appointment = Appointment.find_by(id: params[:id])
+
+    if appointment.destroy
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Appointments#Destroy </h1>" }
+        format.json { render json: appointment }
+      end
+    else
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Appointments#Destroy </h1>" }
+        format.json { render json: appointment.errors.full_messages }
+      end
+    end
+  end
+
   private
 
   def appointment_params
-    params.require(:appointment).permit(:user_id, :vehicle_id, :description, :appointment_date)
+    params.require(:appointment).permit(:vehicle_id, :description, :appointment_date)
   end
 end
