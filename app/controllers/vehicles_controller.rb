@@ -51,9 +51,25 @@ class VehiclesController < ApplicationController
     end
   end
 
+  def destroy
+    vehicle = Vehicle.find_by(id: params[:id])
+
+    if vehicle.destroy
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#Destroy </h1>" }
+        format.json { render json: vehicle }
+      end
+    else
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#Destroy </h1>" }
+        format.json { render json: vehicle.errors.full_messages }
+      end
+    end
+  end
+
   private
 
   def vehicle_params
-    params.require(:vehicle).permit(:brand, :module, :engine_size, :year, :color, :vin, :king, :user_id)
+    params.require(:vehicle).permit(:brand, :model :engine_size, :year, :color, :vin, :kind)
   end
 end
