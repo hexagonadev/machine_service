@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   # patch '/users/:id', controller: :users, action: :update
   # delete 'users/:id', controller: :users, action: :destroy
 
-  resources :users, except: [:new, :edit]
-  resources :vehicles, except: [:new, :edit]
+  resources :users, except: [:new, :edit], shallow: true do
+    resources :vehicles, except: [:new, :edit]
+    resources :appointments, except: [:new, :edit]
+  end
+
   resources :appointments, except: [:new, :edit]
 
 
@@ -21,7 +24,6 @@ Rails.application.routes.draw do
   #   patch "/#{resource}/id", controller: resource.to_sym, action: :update
   #   delete "/#{resource}/id", controller: resource.to_sym, action: :destroy
   # end
-
 
 #  post
 #  put
