@@ -9,4 +9,12 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :email, uniqueness: true
 
+  # def to_json
+  #   {
+  #     name: name,
+  #     email: email,
+  #     vehicles: vehicles.map { |vehicle| { id: vehicle.id, brand: vehicle.brand } }
+  #   }
+  # end
+
 end
