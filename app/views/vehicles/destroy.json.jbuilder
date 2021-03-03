@@ -1,0 +1,1 @@
+json.vehicle "#{@vehicle, :brand, :model, :vin} ELIMINADO"

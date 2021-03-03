@@ -2,12 +2,11 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    users = User.all
+    @users = User.all
 
     respond_to do |format|
       format.html { render inline: "<h1> Hello Users#Index </h1>" }
-      format.json { render json: users }
-    end
+      format.json
   end
 
   def show

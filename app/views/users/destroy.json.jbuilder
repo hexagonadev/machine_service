@@ -1,0 +1,1 @@
+json.user "#{@user, :name, :last_name, :email} ELIMINADO"

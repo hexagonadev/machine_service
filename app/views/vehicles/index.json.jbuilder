@@ -1,0 +1,1 @@
+json.vehicles @vehicles, :brand, :model, :engine_size, :year, :color, :vin, :kind
