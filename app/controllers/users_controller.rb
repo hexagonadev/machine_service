@@ -11,11 +11,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id])
 
     respond_to do |format|
       format.html { render inline: "<h1> Hello Users#Show </h1>" }
-      format.json { render json: user }
+      # format.json { render json: user.to_json }
+      # format.json { render 'vehicles/show.json.jbuilder', status: :ok } # EJEMPLO JALADO DE LOS PELOS
+      # format.json { render :show, status: :201 }
+      format.json
     end
   end
 
