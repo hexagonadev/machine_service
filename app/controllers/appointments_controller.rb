@@ -11,11 +11,11 @@ class AppointmentsController < ApplicationController
   end
 
   def show
-    appointment = Appointment.find_by(id: params[:id])
+    @appointment = Appointment.find_by(id: params[:id])
 
     respond_to do |format|
       format.html { render inline: "<h1> Hello Appointment#Show </h1>" }
-      format.json { render json: appointment }
+      format.json #{ render json: appointment }
     end
   end
 
@@ -28,12 +28,12 @@ class AppointmentsController < ApplicationController
       end
     end
 
-    appointment = user.appointment.build(appointment_params)
+    @appointment = user.appointment.build(appointment_params)
 
-    if appointment.save
+    if @appointment.save
       respond_to do |format|
         format.html { render inline: "<h1> Hello Appointment#Create </h1>" }
-        format.json { render json: appointment }
+        format.json #{ render json: appointment }
       end
     else
       respond_to do |format|
@@ -44,12 +44,12 @@ class AppointmentsController < ApplicationController
   end
 
   def update
-    appointment = Appointment.find_by(id: params[:id])
+    @appointment = Appointment.find_by(id: params[:id])
 
-    if appointment.update(appointment_params)
+    if @appointment.update(appointment_params)
       respond_to do |format|
         format.html { render inline: "<h1> Hello  appointment#update </h1>" }
-        format.json { render json: appointment }
+        format.json #{ render json: appointment }
       end
     else
       respond_to do |format|

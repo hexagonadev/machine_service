@@ -23,12 +23,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
+    @user = User.new(user_params)
 
-    if user.save
+    if @user.save
       respond_to do |format|
         format.html { render inline: "<h1> Hello Users#Create </h1>" }
-        format.json { render json: user }
+        format.json #{ render json: user }
       end
     else
       respond_to do |format|
@@ -39,13 +39,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id])
 
-    if user.update(user_params)
+    if @user.update(user_params)
       respond_to do |format|
         format.html { render inline: "<h1> Hello Users#Create </h1>" }
-        format.json { render json: user }
-      end
+        format.json
     else
       respond_to do |format|
         format.html { render inline: "<h1> Hello Users#Create </h1>" }

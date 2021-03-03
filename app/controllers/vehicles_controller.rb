@@ -11,11 +11,11 @@ class VehiclesController < ApplicationController
   end
 
   def show
-    vehicle = Vehicle.find_by(id: params[:id])
+    @vehicle = Vehicle.find_by(id: params[:id])
 
     respond_to do |format|
       format.html { render inline: "<h1> Hello Vehicles#Show </h1>" }
-      format.json { render json: vehicle }
+      format.json #{ render json: vehicle }
     end
   end
 
@@ -27,15 +27,15 @@ class VehiclesController < ApplicationController
         format.json { render json: "Error", status: 400 and return }
       end
     end
-    vehicle = user.vehicles.build(vehicle_params)
+    @vehicle = user.vehicles.build(vehicle_params)
 
     # vehicle = Vehicle.new(vehicle_params)
     # vehicle.user_id = user.id
     # vehicle.user = user
-    if vehicle.save
+    if @vehicle.save
       respond_to do |format|
         format.html { render inline: "<h1> Hello Vehicles#Create </h1>" }
-        format.json { render json: vehicle }
+        format.json #{ render json: vehicle }
       end
     else
       respond_to do |format|
@@ -46,12 +46,12 @@ class VehiclesController < ApplicationController
   end
 
   def update
-    vehicle = Vehicle.find_by(id: params[:id])
+    @vehicle = Vehicle.find_by(id: params[:id])
 
-    if vehicle.update(vehicle_params)
+    if @vehicle.update(vehicle_params)
       respond_to do |format|
         format.html { render inline: "<h1> Hello  vehicles#update </h1>" }
-        format.json { render json: vehicle }
+        format.json #{ render json: vehicle }
       end
     else
       respond_to do |format|
