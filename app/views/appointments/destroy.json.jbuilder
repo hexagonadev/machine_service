@@ -1,1 +1,1 @@
-json.appointment "#{@appointment, :description, :appointment_date} ELiminado"
+json.appointment "#{@appointment, :description, :appointment_date} Eliminado"

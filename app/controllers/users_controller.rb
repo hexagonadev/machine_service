@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { render inline: "<h1> Hello Users#Index </h1>" }
       format.json
+    end
   end
 
   def show
@@ -22,49 +23,49 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
+    @user = User.new(user_params)
 
-    if user.save
+    if @user.save
       respond_to do |format|
         format.html { render inline: "<h1> Hello Users#Create </h1>" }
-        format.json { render json: user }
+        format.json
       end
     else
       respond_to do |format|
         format.html { render inline: "<h1> Hello Users#Create </h1>" }
-        format.json { render json: user.errors.full_messages }
+        format.json
       end
     end
   end
 
   def update
-    user = User.find_by(id: params[:user_id])
+    @user = User.find_by(id: params[:user_id])
 
-    if user.update(user_params)
+    if @user.update(user_params)
       respond_to do |format|
         format.html { render inline: "<h1> Hello Users#Create </h1>" }
-        format.json { render json: user }
+        format.json
       end
     else
       respond_to do |format|
         format.html { render inline: "<h1> Hello Users#Create </h1>" }
-        format.json { render json: user.errors.full_messages }
+        format.json
       end
     end
   end
 
   def destroy
-    user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id])
 
-    if user.destroy
+    if @user.destroy
       respond_to do |format|
         format.html { render inline: "<h1> Hello Users#Destroy </h1>" }
-        format.json { render json: user }
+        format.json
       end
     else
       respond_to do |format|
         format.html { render inline: "<h1> Hello Users#Destroy </h1>" }
-        format.json { render json: user.errors.full_messages }
+        format.to_json
       end
     end
   end
