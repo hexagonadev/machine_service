@@ -1,6 +1,13 @@
-json.vehicle @vehicle, :brand, :model, :vin
-json.message "eliminado"
+if @vehicle.nil?
+  json.message "Vehiculo no existe"
+end
 
-if @vehicle.errors.any?
-  json.error @vehicle.errors.full_messages
+json.vehicle do
+  json.brand @vehicle.brand
+  json.model @vehicle.vin
+  json.message "Eliminado"
+
+  if @vehicle.errors.any?
+    json.error @vehicle.errors.full_messages
+  end
 end

@@ -2,7 +2,7 @@ class AppointmentsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @appointments = Appointment.all
+    @appointments = Appointment.where(user_id: params[:user_id])
 
     respond_to do |format|
       format.html { render inline: "<h1> Hello Appointments#Index </h1>" }
@@ -12,6 +12,12 @@ class AppointmentsController < ApplicationController
 
   def show
     @appointment = Appointment.find_by(id: params[:id])
+    if @appointment.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#Destroy </h1>" }
+        format.json { render json: "Error", status: 400 and return }
+      end
+    end
 
     respond_to do |format|
       format.html { render inline: "<h1> Hello Appointments#Show </h1>" }

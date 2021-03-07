@@ -47,7 +47,7 @@ class VehiclesController < ApplicationController
   end
 
   def update
-    @vehicle = Vehicle.find_by(id: params[:vehicle_id])
+    @vehicle = Vehicle.find_by(id: params[:id])
 
     if @vehicle.update(vehicle_params)
       respond_to do |format|
@@ -63,9 +63,15 @@ class VehiclesController < ApplicationController
   end
 
   def destroy
-    vehicle = Vehicle.find_by(id: params[:id])
+    @vehicle = Vehicle.find_by(id: params[:id])
+    if @vehicle.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#Destroy </h1>" }
+        format.json { render json: "Error", status: 400 and return }
+      end
+    end
 
-    if vehicle.destroy
+    if @vehicle.destroy
       respond_to do |format|
         format.html { render inline: "<h1> Hello Vehicles#Destroy </h1>" }
         format.json
@@ -73,7 +79,7 @@ class VehiclesController < ApplicationController
     else
       respond_to do |format|
         format.html { render inline: "<h1> Hello vehicles#Destroy </h1>" }
-        format.json { render json: vehicle.errors.full_messages }
+        format.json
       end
     end
   end

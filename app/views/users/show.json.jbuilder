@@ -8,4 +8,5 @@ json.user do
     json.brand vehicle.brand
     json.vin vehicle.vin
   end
+  json.message "Vista de Usuario"
 end
