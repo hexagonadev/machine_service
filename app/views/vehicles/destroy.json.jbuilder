@@ -8,4 +8,7 @@ json.vehicle do
   json.color @vehicle.color
   json.year @vehicle.year
   json.vin @vehicle.vin
+
+  json.vehicle "Vehiculo eliminado con exito"
+
 end

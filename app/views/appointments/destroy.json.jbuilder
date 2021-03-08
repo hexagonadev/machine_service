@@ -6,4 +6,9 @@ json.appointment do
   json.description @appointment.description
   json.status @appointment.status
 
+  json.vehicle "Cita eliminada con exito"
+
+  if @appointment.errors.any?
+    json.errors @appointment.errors.full_messages
+  end
 end
