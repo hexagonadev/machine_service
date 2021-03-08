@@ -4,9 +4,6 @@ json.user do
   json.email @user.email
 
 
-  if @user.errors.any?
-    json.errors @user.errors.full_messages
-  else
-   "Usuario Eliminado con exito"
-  end
+  json.user "Usuario Eliminado con exito"
+
 end
