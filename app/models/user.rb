@@ -1,11 +1,10 @@
 class User < ActiveRecord::Base
-  has_many :vehicles
+  has_many :vehicles, dependent: :destroy
   # has_many :maintenance_appointments
   # has_many :social_networks
-  has_many :appointments
+  has_many :appointments, dependent: :destroy
   # has_and_belongs_to_many :roles
   # has_one :profile
-
   validates :email, presence: true
   validates :email, uniqueness: true
 

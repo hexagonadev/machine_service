@@ -13,6 +13,13 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
 
+    if @user.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello users#show </h1>" }
+        format.json { render json: "Usuario no existe", status: 400 and return }
+      end
+    end
+
     respond_to do |format|
       format.html { render inline: "<h1> Hello Users#Show </h1>" }
       # format.json { render json: user.to_json }
@@ -40,6 +47,12 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
+    if @user.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello users#show </h1>" }
+        format.json { render json: "Usuario no existe", status: 400 and return }
+      end
+    end
 
     if @user.update(user_params)
       respond_to do |format|
@@ -56,6 +69,12 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find_by(id: params[:id])
+    if @user.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello users#show </h1>" }
+        format.json { render json: "Usuario no existe", status: 400 and return }
+      end
+    end
 
     if @user.destroy
       respond_to do |format|

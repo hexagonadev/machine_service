@@ -12,6 +12,12 @@ class VehiclesController < ApplicationController
 
   def show
     @vehicle = Vehicle.find_by(id: params[:id])
+    if @vehicle.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#show </h1>" }
+        format.json { render json: "Vehiculo no existe", status: 400 and return }
+      end
+    end
 
     respond_to do |format|
       format.html { render inline: "<h1> Hello Vehicles#Show </h1>" }
@@ -48,6 +54,12 @@ class VehiclesController < ApplicationController
 
   def update
     @vehicle = Vehicle.find_by(id: params[:id])
+    if @vehicle.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#update </h1>" }
+        format.json { render json: "Vehiculo no existe", status: 400 and return }
+      end
+    end
 
     if @vehicle.update(vehicle_params)
       respond_to do |format|
@@ -67,7 +79,7 @@ class VehiclesController < ApplicationController
     if @vehicle.nil?
       respond_to do |format|
         format.html { render inline: "<h1> Hello Vehicles#Destroy </h1>" }
-        format.json { render json: "Error", status: 400 and return }
+        format.json { render json: "Vehiculo no existe", status: 400 and return }
       end
     end
 
