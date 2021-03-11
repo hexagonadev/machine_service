@@ -2,11 +2,22 @@ class VehiclesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    vehicles = Vehicle.where(user_id: params[:user_id])
+    @vehicles = if params[:search]
+                  Vehicle.where(vin: params[:search][:vin])
+                else
+                  Vehicle.where(user_id: params[:user_id])
+               end
 
-    respond_to do |format|
-      format.html { render inline: "<h1> Hello Vehicles#Index </h1>" }
-      format.json { render json: vehicles }
+    if @vehicles.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#Update </h1>" }
+        format.json { render json: { error: "Este Vehiculo no existe" }  , status: :bad_request and return }
+      end
+    else
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#Index </h1>" }
+        format.json
+      end
     end
   end
 
@@ -16,7 +27,7 @@ class VehiclesController < ApplicationController
     if @vehicle.nil?
       respond_to do |format|
         format.html { render inline: "<h1> Hello Vehicles#Update </h1>" }
-        format.json { render json: { vehicle: "Este Vehiculo no existe" }  , status: :bad_request and return }
+        format.json { render json: { error: "Este Vehiculo no existe" }  , status: :bad_request and return }
       end
     else
 

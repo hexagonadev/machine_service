@@ -2,11 +2,22 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    users = User.all
+    @users = if params[:search]
+              User.where(email: params[:search][:email])
+           else
+              User.all
+           end
 
-    respond_to do |format|
-      format.html { render inline: "<h1> Hello Users#Index </h1>" }
-      format.json { render json: users }
+    if @users.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#index </h1>", status: :bad_request and return }
+        format.json { render json: { error: "Este usuario no existe" }  , status: :bad_request and return }
+      end
+    else
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Users#Index </h1>" }
+        format.json
+      end
     end
   end
 
