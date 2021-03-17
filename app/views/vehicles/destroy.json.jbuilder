@@ -1,5 +1,4 @@
 json.vehicle do
-
   json.id @vehicle.id
   json.user_id @vehicle.user_id
   json.kind @vehicle.kind
@@ -9,5 +8,7 @@ json.vehicle do
   json.color @vehicle.color
   json.year @vehicle.year
   json.vin @vehicle.vin
+
+  json.vehicle "Vehiculo eliminado con exito"
 
 end

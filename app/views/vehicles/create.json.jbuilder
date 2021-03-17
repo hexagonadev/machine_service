@@ -10,4 +10,8 @@ json.vehicle do
   json.year @vehicle.year
   json.vin @vehicle.vin
 
+  if @vehicle.errors.any?
+    json.errors @vehicle.errors.full_messages
+  end
+
 end
