@@ -4,10 +4,9 @@ class UsersController < ApplicationController
   def index
     @users = if params[:search]
               User.where(email: params[:search][:email])
-           else
+            else
               User.all
-           end
-
+            end
     if @users.nil?
       respond_to do |format|
         format.html { render inline: "<h1> Hello Vehicles#index </h1>", status: :bad_request and return }

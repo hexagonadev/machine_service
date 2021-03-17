@@ -2,11 +2,22 @@ class AppointmentsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    appointments = Appointment.all
+    @appointments = if params[:search]
+                      Appointment.where(vehicle_id: params[:search][:vehicle_id])
+                    else
+                      Appointment.all
+                    end
 
-    respond_to do |format|
-      format.html { render inline: "<h1> Hello Vehicles#Index </h1>" }
-      format.json { render json: appointments }
+    if @appointments.nil?
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#index </h1>", status: :bad_request and return }
+        format.json { render json: { error: "Este vehiculo no tiene cita" }  , status: :bad_request and return }
+      end
+    else
+      respond_to do |format|
+        format.html { render inline: "<h1> Hello Vehicles#Index </h1>" }
+        format.json
+      end
     end
   end
 
