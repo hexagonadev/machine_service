@@ -6,8 +6,7 @@ class User < ActiveRecord::Base
   # has_and_belongs_to_many :roles
   # has_one :profile
 
-  validates :email, presence: true
-  validates :email, uniqueness: true
+  validates :email, presence: true, uniqueness: true, email_format: true
 
   # def to_json
   #   {
