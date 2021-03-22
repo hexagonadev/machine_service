@@ -8,5 +8,8 @@ json.user do
     json.brand vehicle.brand
     json.vin vehicle.vin
   end
-  json.message "Vista de Usuario"
+
+  if @user.errors.any?
+    json.errors @user.errors.full_messages
+  end
 end

@@ -8,6 +8,6 @@ json.vehicle do
   json.message "Eliminado"
 
   if @vehicle.errors.any?
-    json.error @vehicle.errors.full_messages
+    json.errors @vehicle.errors.full_messages
   end
 end

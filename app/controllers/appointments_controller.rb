@@ -2,9 +2,12 @@ class AppointmentsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @appointments = Appointment.where(user_id: params[:user_id])
-
-    respond_to do |format|
+    @appointments = if params[:search]
+                      Appointment.where(vehicle_id: params[:search][:vehicle_id])
+                    else
+                      Appointment.where(user_id: params[:user_id])
+                    end
+      respond_to do |format|
       format.html { render inline: "<h1> Hello Appointments#Index </h1>" }
       format.json
     end
@@ -43,7 +46,7 @@ class AppointmentsController < ApplicationController
     else
       respond_to do |format|
         format.html { render inline: "<h1> Hello Appointments#Create </h1>" }
-        #format.json { render json: @appointment.errors.full_messages }
+        format.json { render json: @appointment.errors.full_messages }
       end
     end
   end

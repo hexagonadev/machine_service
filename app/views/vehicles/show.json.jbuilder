@@ -8,5 +8,8 @@ json.vehicle do
   json.vin @vehicle.vin
   json.kind @vehicle.kind
   json.user_id @vehicle.user_id
-  json.message "Características del Vehiculo"
+
+  if @vehicle.errors.any?
+    json.errors @vehicle.errors.full_messages
+  end
 end

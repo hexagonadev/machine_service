@@ -2,12 +2,15 @@ class VehiclesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @vehicles = Vehicle.where(user_id: params[:user_id])
-
-    respond_to do |format|
-      format.html { render inline: "<h1> Hello Vehicles#Index </h1>" }
-      format.json
-    end
+    @vehicles = if params[:search]
+                Vehicle.where(vin: params[:search][:vin])
+               else
+                 Vehicle.where(user_id: params[:user_id])
+               end
+               respond_to do |format|
+                format.html { render inline: "<h1> Hello Vehicles#show </h1>" }
+                format.json
+              end
   end
 
   def show

@@ -2,8 +2,11 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @users = User.all
-
+    @users = if params[:search]
+              User.where(email: params[:search][:email])
+            else
+              User.all
+            end
     respond_to do |format|
       format.html { render inline: "<h1> Hello Users#Index </h1>" }
       format.json
