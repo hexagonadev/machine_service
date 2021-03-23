@@ -7,14 +7,15 @@ class UsersController < ApplicationController
             else
               User.all
             end
-    if @users.nil?
+
+    if @users[0].nil? && params[:search]
       respond_to do |format|
         format.html { render inline: "<h1> Hello Vehicles#index </h1>", status: :bad_request and return }
-        format.json { render json: { error: "Este usuario no existe" }  , status: :bad_request and return }
+        format.json { render json: { error: "Este usuario no existe" }, status: :bad_request and return }
       end
     else
       respond_to do |format|
-        format.html { render inline: "<h1> Hello Users#Index </h1>" }
+        format.html { render inline: "<h1> Hello Users#Index </h1>"}
         format.json
       end
     end
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
 
     if @user.nil?
       respond_to do |format|
-        format.html { render inline: "<h1> Hello Vehicles#Create </h1>", status: :bad_request and return }
+a        format.html { render inline: "<h1> Hello Vehicles#Create </h1>", status: :bad_request and return }
         format.json { render json: { user: "Este usuario no existe" }  , status: :bad_request and return }
       end
     else
