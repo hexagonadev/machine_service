@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render inline: "<h1> Hello Users#Index </h1>"}
+        format.html
         format.json
       end
     end

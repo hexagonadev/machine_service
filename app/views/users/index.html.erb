@@ -1,0 +1,18 @@
+<h1 class="welcome"> HOLA muchiachas! </h1>
+<%= 2 + 2 %>
+
+<% if 1 > 1 %>
+  <h4> HOLA vale!</h4>
+<% end %>
+
+<% hola = "Chao" %>
+
+<%= hola %>
+
+<% if @users.size == 0 %>
+  <h4> No hay usuarios!</h4>
+<% end %>
+
+<p class="bg-gray-200">
+  Usuario: <%= @users.first.name %>
+</p>
